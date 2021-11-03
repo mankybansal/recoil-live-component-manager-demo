@@ -18,6 +18,17 @@ const Green = styled.span`
   color: green;
 `;
 
+const LoadingIndicator = ({ loading }: { loading: boolean }) =>
+  loading ? (
+    <b>
+      true <Red>(Not ready)</Red>
+    </b>
+  ) : (
+    <b>
+      false <Green>(Ready)</Green>
+    </b>
+  );
+
 const FooLiveComponent = ({
   idx,
   loadingFromProps
@@ -34,9 +45,8 @@ const FooLiveComponent = ({
     <RootContainer>
       <b>Live component {idx + 1}.</b>
       <br />
-      <i>loading</i> — (from Recoil):{" "}
-      <b>{loadingFromRecoil ? <Red>True</Red> : <Green>False</Green>}</b>, (from Props):{" "}
-      <b>{loadingFromProps ? <Red>True</Red> : <Green>False</Green>}</b>
+      <i>loading</i> — (from Recoil): <LoadingIndicator loading={loadingFromRecoil} />
+      , (from Props): <LoadingIndicator loading={loadingFromProps} />
       <br />
       <br />
       <div>
